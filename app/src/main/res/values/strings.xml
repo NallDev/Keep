@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Keep</string>
+
+    <string name="error_code_400">Oops! Something went wrong. Please check your input and try again.</string>
+    <string name="error_code_401">Your session has expired. Please log in again.</string>
+    <string name="error_code_403">Sorry, you don\'t have permission to access this resource.</string>
+    <string name="error_code_404">We couldn\'t find what you\'re looking for.</string>
+    <string name="error_code_408">The request timed out. Please try again.</string>
+    <string name="error_code_429">You\'re making requests too quickly. Please slow down.</string>
+    <string name="error_code_500">We\'re experiencing some issues. Please try again later.</string>
+    <string name="error_code_default">An unexpected error occurred. Please try again.</string>
+    <string name="no_internet_connection">No internet connection. Please check your network settings.</string>
+    <string name="hello_there">Hello, There</string>
+    <string name="welcome">Welcome</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email_hint">Your great username…</string>
+    <string name="password_hint">Your best password…</string>
+    <string name="invalid_email_msg">I think your email format is wrong</string>
+    <string name="min_character_msg">Must be at least 8 characters</string>
+    <string name="login_to_your_account">Login to Your Account</string>
+    <string name="make_sure_that_you_already_have_an_account">Make sure that you already have an account</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="create_your_account">Create Your Account</string>
+    <string name="make_sure_your_account_keep_secure">Make sure your account keep secure</string>
+    <string name="username">Username</string>
+    <string name="username_hint">Your great username…</string>
+    <string name="register_success_msg">Great, you are registered now</string>
+    <string name="put_session_error_msg">Sorry, your session has an error</string>
+    <string name="remove_session_error_msg">Wait, your session has an error</string>
+    <string name="login_success_msg">Welcome to Keep</string>
+    <string name="retry">Retry</string>
+    <string name="permission_denied_title">Ahhhhh</string>
+    <string name="permission_denied_description">This application needs your permission</string>
+    <string name="back">Back</string>
+    <string name="setting">Setting</string>
+    <string name="convert_uri_fail_msg">Ohhh nooo, application can\'t process your image</string>
+    <string name="are_you_sure_want_to_logout">Are you sure want to logout?</string>
+    <string name="logout">Logout</string>
+</resources>
