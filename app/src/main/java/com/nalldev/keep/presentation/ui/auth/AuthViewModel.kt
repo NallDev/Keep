@@ -43,18 +43,24 @@ class AuthViewModel(
         } catch (e: Exception) {
             _loginResult.postValue(UIState.Error)
             _toastEvent.postValue("Username or password is wrong")
+            println(e.message)
         }
     }
 
     fun doRegister(username: String, email : String, password: String) = viewModelScope.launch  {
+        _registerResult.postValue(UIState.Loading)
         try {
             val isSuccess = authUseCases.doRegister(username, email, password)
             if (isSuccess) {
+                _registerResult.postValue(UIState.Success(true))
                 _transitionState.postValue(TransitionState.START)
+                _toastEvent.postValue("Great, you are registered now")
             } else {
+                _registerResult.postValue(UIState.Error)
                 _toastEvent.postValue("Check your input")
             }
         } catch (e : Exception) {
+            _registerResult.postValue(UIState.Error)
             _toastEvent.postValue("Check your input")
         }
     }
@@ -63,6 +69,7 @@ class AuthViewModel(
         try {
             userSessionUseCases.putUserSession(UserModel(token))
             _loginResult.postValue(UIState.Success(true))
+            _toastEvent.postValue("Welcome to Keep")
         } catch (e : Exception) {
             _loginResult.postValue(UIState.Error)
             _toastEvent.postValue("Username or password is wrong")

@@ -20,5 +20,5 @@ val dataSourceModule = module {
     single { providePreferences(get()) }
     single { provideGson() }
     single { PreferencesDataSource(get(), get(), get(named("IODispatcher"))) }
-    single { NetworkDataSources(get(), get()) }
+    single { NetworkDataSources(get(), get(named("IODispatcher"))) }
 }

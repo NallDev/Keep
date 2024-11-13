@@ -1,14 +1,19 @@
 package com.nalldev.keep.presentation.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import com.nalldev.keep.R
 import com.nalldev.keep.databinding.ActivityAuthBinding
+import com.nalldev.keep.presentation.ui.home.MainActivity
 import com.nalldev.keep.utils.CommonHelper
+import com.nalldev.keep.utils.UIState
 import com.nalldev.keep.utils.clearAllFocus
 import com.nalldev.keep.utils.hideKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -56,6 +61,29 @@ class AuthActivity : AppCompatActivity() {
 
             clearInput()
         }
+
+        registerResult.observe(this@AuthActivity) { uiState ->
+            when(uiState) {
+                is UIState.Error -> binding.loadingView.isVisible = false
+                is UIState.Loading -> binding.loadingView.isVisible = true
+                is UIState.Success -> binding.loadingView.isVisible = false
+            }
+        }
+
+        loginResult.observe(this@AuthActivity) { uiState ->
+            when(uiState) {
+                is UIState.Error -> binding.loadingView.isVisible = false
+                is UIState.Loading -> binding.loadingView.isVisible = true
+                is UIState.Success -> {
+                    binding.loadingView.isVisible = false
+                    navigateToMainActivity()
+                }
+            }
+        }
+
+        toastEvent.observe(this@AuthActivity) { message ->
+            Toast.makeText(this@AuthActivity, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initListener() = with(binding) {
@@ -96,10 +124,21 @@ class AuthActivity : AppCompatActivity() {
             binding.edRegisterName,
             binding.edRegisterEmail,
             binding.edRegisterPassword,
-            binding.edLoginEmail,
+            binding.edLoginUsernmae,
             binding.edLoginPassword
         ))
         hideKeyboard()
         clearAllFocus()
+    }
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.putMotionProgress(binding.motionLayout.progress)
     }
 }

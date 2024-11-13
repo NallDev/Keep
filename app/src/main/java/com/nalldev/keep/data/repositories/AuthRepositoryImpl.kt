@@ -10,7 +10,7 @@ class AuthRepositoryImpl(
     private val networkDataSources: NetworkDataSources
 ) : AuthRepository {
     override suspend fun register(request: RegisterModel): Boolean {
-        return networkDataSources.register(Mapper.registerToEntity(request)).errorMessage != null
+        return networkDataSources.register(Mapper.registerToEntity(request)).errorMessage == null
     }
 
     override suspend fun login(request: LoginModel): String {
